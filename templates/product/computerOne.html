@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<h1 class="text text-center fw-bold display-6" style="color:#443627; text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);">
+    รายละเอียดสินค้า ({{computer.category}})
+</h1>
+
+
+<table class="container my-5 fw-bold table table-bordered table-hover table-striped"
+    style="background-color: rgb(255, 240, 220); border-radius: 15px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);">
+    
+    <tr > 
+        <td class="fw-bold col col-1"  style="background-color: #443627; color: #F8F3D9;" >รหัสสินค้า</td> <td>{{ computer.cid }} </td> 
+    </tr>
+    <tr> <td class="fw-bold" style="background-color: #443627; color: #F8F3D9;">ชื่อสินค้า</td> <td class="display-6">{{ computer.name }} </td> </tr>
+    <tr> <td class="fw-bold" style="background-color: #443627; color: #F8F3D9;">แบรนด์</td> <td class="display-6">{{ computer.brand }}</td> </tr>
+    <tr> <td class="fw-bold" style="background-color: #443627; color: #F8F3D9;">ราคา</td> <td class="display-6">{{ computer.price }} บาท</td> </tr>
+    <tr> <td class="fw-bold" style="background-color: #443627; color: #F8F3D9;">สต๊อก</td> <td>{{ computer.stock }} ชิ้น</td> </tr>
+    <tr> <td class="fw-bold" style="background-color: #443627; color: #F8F3D9;">cpu</td> <td>{{ computer.cpu }} </td> </tr>
+    <tr> <td class="fw-bold" style="background-color: #443627; color: #F8F3D9;">หมวดหมู่</td> <td>{{ computer.category }} </td> </tr>
+        <td class="fw-bold" style="background-color: #443627; color: #F8F3D9;">รูปภาพ </td> 
+        <td > 
+            <img src="/{{ computer.images }}" 
+                class="rounded shadow-sm"
+                style="width: 450px; height: 450px; object-fit: cover;" >
+                <br>
+                <h2 class="fw-bold">คุณสมบัติ</h2>
+                    <table table class="container my-6 fw-bold table table-bordered table-hover"
+                    style="background-color: rgb(255, 240, 220); border-radius: 15px; ">
+                        <tr>
+                            <th>CPU</th>
+                            <td>{{ computer.cpu }}</td>
+                        </tr>
+                        <tr>
+                            <th>CPUCooler</th>
+                            <td>{{ computer.cpuCooler }}</td>
+                        </tr>
+                        <tr>
+                            <th>Mainboard</th>
+                            <td>{{ computer.mainboard }}</td>
+                        </tr>
+                        <tr>
+                            <th>RAM</th>
+                            <td>{{ computer.ram }}</td>
+                        </tr>
+                        <tr>
+                            <th>Storage</th>
+                            <td>{{ computer.storage }}</td>
+                        </tr>
+                        <tr>
+                            <th>Case</th>
+                            <td>{{ computer.case }}</td>
+                        </tr>
+                    </table> 
+        </td> 
+    </tr>
+</table>
+
+<p class="text-center">
+    <a href="{% url 'computerList' %}" class="btn btn-danger shadow">
+        <i class="fa-solid fa-reply "></i></i> Back     
+    </a>     
+</p>
+
+{% endblock %}

@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+    <div> 
+        <h1 class="text text-center fw-bold display-6" style="color:#443627; text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);">
+            คลังสินค้า
+        </h1>
+        
+       
+        <head>
+            <style>
+                .stock-table {
+                    width: 100%;
+                    border-collapse: collapse;
+                    margin-top: 20px;
+                }
+                .stock-table th, .stock-table td {
+                    border: 1px solid #ddd;
+                    padding: 8px;
+                    text-align: center;
+                }
+                .stock-table th {
+                    background-color: #443627;
+                    color: F8F3D9;
+                }
+                .stock-table tr:nth-child(even) {
+                    background-color: #f2f2f2;
+                }
+                .status-available {
+                    color: green;
+                }
+                .status-low {
+                    color: orange;
+                }
+                .action-icons a {
+                    text-decoration: none;
+                    margin: 0 5px;
+                    font-size: 18px;
+                }
+                .filter-section {
+                    margin-bottom: 20px;
+                }
+            </style>
+        </head>
+        <table class="container my-4 fw-bold table table-bordered table-hover table-striped"
+        style="background-color: rgb(255, 240, 220); border-radius: 15px; 
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);">
+            <tr>
+                <th class="fw-bold" style="background-color: #443627; color: #F8F3D9;">ชื่อสินค้า</th>
+                <th class="fw-bold" style="background-color: #443627; color: #F8F3D9;">แบรนด์</th>
+                <th class="fw-bold" style="background-color: #443627; color: #F8F3D9;">ราคา</th>
+                <th class="fw-bold" style="background-color: #443627; color: #F8F3D9;">สต๊อก</th>
+                <th class="fw-bold" style="background-color: #443627; color: #F8F3D9;">ประเภทสินค้า</th>
+                <th class="fw-bold" style="background-color: #443627; color: #F8F3D9;">รูปภาพ</th>
+                <th class="fw-bold" style="background-color: #443627; color: #F8F3D9;">Action</th>
+            </tr>
+            {% for computer in computers %}
+            <tr>
+                <td class="col col-3">{{ computer.name }}</td>
+                <td class="col col-1">{{ computer.brand }}</td>
+                <td>฿ {{ computer.price }}</td>
+                <td class="col col-1 text-center    ">{{ computer.stock }}</td>
+                <td>{{ computer.category }}</td>
+                <td class="col col-1"> 
+                    <img src="/{{ computer.images }}" 
+                        class="rounded shadow-sm"
+                        style="width: 250px; height: 250px; object-fit: cover;"><br>
+                </td>
+                  
+                <td class="action-icons col col-1 text-center">
+                    <a href="{% url 'computerOne' computer.cid %}"><i class="fa-solid fa-pen"></i></a>
+                    <a href="#"><i class="fa-regular fa-trash-can"></i></a>
+                </td>
+            </tr>
+            {% endfor %}      
+        </table>
+    </div>
+
+{% endblock %}

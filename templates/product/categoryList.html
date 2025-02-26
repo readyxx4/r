@@ -1,0 +1,17 @@
+    <html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Category Dropdown</title>
+</head>
+<body>
+    <form method="GET" action="{% url 'categoryList' %}">
+        <select name="category" id="categorySelect">
+            <option value="">หมวดหมู่ทั้งหมด</option>
+            {% for category in categorys %}
+                <option value="{{ category.name }}">{{ category.name }}</option>
+            {% endfor %}
+        </select>
+    </form>
+</body>
+</html>

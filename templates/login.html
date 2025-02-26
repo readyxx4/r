@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<br><br>
+<div class="jumbotron col-md-4 mx-auto list-group-item custom-menu" style="background-color: #443627; border-radius: 15px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.7); padding: 20px; text-align: center; margin-top: 50px;">
+    <h1 class="display-6 text-white">ล็อกอิน </h1>
+   
+    <form method="POST" action="{% url 'user_login' %}" onsubmit="return validateForm()">
+        {% csrf_token %}
+        <div class="mb-3">
+            <input type="text" id="username" name="username" placeholder="ชื่อผู้ใช้" class="form-control" required>
+        </div>
+        <div class="mb-4">
+            <input type="password" id="password" name="password" placeholder="รหัสผ่าน" class="form-control" required>
+        </div>
+        <button type="submit" class="btn btn-light w-100">เข้าสู่ระบบ</button>
+    </form>
+
+    <div class="mt-3">
+        <a href="{% url 'home' %}" class="btn btn-secondary w-100">กลับหน้าแรก</a>
+    </div>
+</div>
+
+
+
+<script>
+    function validateForm() {
+        let username = document.getElementById("username").value;
+        let password = document.getElementById("password").value;
+        
+        if (username.trim() === "" || password.trim() === "") {
+            alert("กรุณากรอกชื่อผู้ใช้และรหัสผ่าน");
+            return false;
+        }
+        return true;
+    }
+</script>
+
+{% endblock %}

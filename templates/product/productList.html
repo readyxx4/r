@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+<style>
+    .banner {
+        background-color:#443627;
+        color: white;
+        text-align: center;
+        padding: 30px;
+        font-size: 24px;
+        font-weight: bold;
+        border-radius: 10px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        margin-bottom: 30px;
+    }
+    .category-card {
+        border-radius: 15px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        transition: transform 0.3s ease-in-out;
+    }
+    .category-card:hover {
+        transform: scale(1.05);
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+    }
+    .card-title {
+        font-weight: bold;
+        color: #3e2723;
+    }
+    footer {
+        background: #2c1f14;
+        color: white;
+        text-align: center;
+        padding: 15px;
+        margin-top: 30px;
+        border-radius: 10px;
+    }
+</style>
+
+<div class="container my-5">
+    <div class="banner" style='color:#F8F3D9;'>ระบบจัดการสต๊อกสินค้าอิเล็กทรอนิกส์</div>
+    <div class="filter-section ">
+        <label>ค้นหาสินค้า: </label>
+        <input type="text" placeholder="ค้นหาชื่อสินค้า">
+        <label>หมวดหมู่สินค้า: </label>
+        <select name="category" id="category">
+            <option value= "{{ category.name }}">คอมพิวเตอร์</option>
+            <option value="saab">จอ</option>
+            <option value="opel">ปริ้นเตอร์</option>
+            <option value="audi">อุปกรณ์เสริม</option>
+          </select>
+        <button style="background: green; color: white; padding: 5px 10px; border: none; border-radius: 5px;"> กดกรองผล</button>
+        <button style="background: #ccc; padding: 5px 10px; border: none; border-radius: 5px;"> ตั้งค่าใหม่</button>
+    </div>
+    <br>
+    <div class="row d-flex justify-content-center align-items-center">
+        <div class="col-md-2">
+            <div class="card category-card">
+                <a class="nav-link" href="{% url 'computerList' %}" style="color:#F8F3D9;">
+                    <img src="{% static 'images/comset.jpg' %}" alt="predetor" class="card-img-top" style="width: 100%; height: 140px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.7);">
+                    <div class="card-body text-center">
+                        <h5 class="card-title">คอมพิวเตอร์</h5>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="card category-card">
+                <img src="{% static 'images/moni.jpeg' %}" alt="predetor" class="card-img-top" style="width: 100%; height: 140px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.7);">
+                <div class="card-body text-center">
+                    <h5 class="card-title">จอ</h5>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="card category-card">
+                <img src="{% static 'images/printer.jpg' %}" alt="predetor" class="card-img-top" style="width: 100%; height: 140px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.7);">
+                <div class="card-body text-center">
+                    <h5 class="card-title">ปริ้นเตอร์</h5>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2">
+            <div class="card category-card">
+                <img src="{% static 'images/speker.jpg' %}" alt="predetor" class="card-img-top" style="width: 100%; height: 140px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.7);">
+                <div class="card-body text-center">
+                    <h5 class="card-title">อุปกรณ์เสริม</h5>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+</div>
+
+{% endblock %}
