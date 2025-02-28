@@ -2,79 +2,101 @@
 {% load static %}
 {% block content %}
 
-    <div> 
-        <h1 class="text text-center fw-bold display-6" style="color:#443627; text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);">
-            คลังสินค้า
-        </h1>
-        
-       
-        <head>
-            <style>
-                .stock-table {
-                    width: 100%;
-                    border-collapse: collapse;
-                    margin-top: 20px;
-                }
-                .stock-table th, .stock-table td {
-                    border: 1px solid #ddd;
-                    padding: 8px;
-                    text-align: center;
-                }
-                .stock-table th {
-                    background-color: #443627;
-                    color: F8F3D9;
-                }
-                .stock-table tr:nth-child(even) {
-                    background-color: #f2f2f2;
-                }
-                .status-available {
-                    color: green;
-                }
-                .status-low {
-                    color: orange;
-                }
-                .action-icons a {
-                    text-decoration: none;
-                    margin: 0 5px;
-                    font-size: 18px;
-                }
-                .filter-section {
-                    margin-bottom: 20px;
-                }
-            </style>
-        </head>
-        <table class="container my-4 fw-bold table table-bordered table-hover table-striped"
-        style="background-color: rgb(255, 240, 220); border-radius: 15px; 
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);">
+<div class="container my-5">
+    <h1 class="text-center fw-bold display-6" 
+        style="color:#443627; text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);">
+        🏬 คลังสินค้า
+    </h1>
+
+    <!-- ปุ่มเพิ่มสินค้า -->
+    <div class="text-end my-3">
+        <a href="{% url 'computerCreate' %}" class="btn btn-primary btn-lg shadow">
+            ➕ เพิ่มสินค้า
+        </a>
+    </div>
+
+    <table class="table table-bordered table-hover table-striped stock-table mt-4">
+        <thead>
             <tr>
-                <th class="fw-bold" style="background-color: #443627; color: #F8F3D9;">ชื่อสินค้า</th>
-                <th class="fw-bold" style="background-color: #443627; color: #F8F3D9;">แบรนด์</th>
-                <th class="fw-bold" style="background-color: #443627; color: #F8F3D9;">ราคา</th>
-                <th class="fw-bold" style="background-color: #443627; color: #F8F3D9;">สต๊อก</th>
-                <th class="fw-bold" style="background-color: #443627; color: #F8F3D9;">ประเภทสินค้า</th>
-                <th class="fw-bold" style="background-color: #443627; color: #F8F3D9;">รูปภาพ</th>
-                <th class="fw-bold" style="background-color: #443627; color: #F8F3D9;">Action</th>
+                <th>ชื่อสินค้า</th>
+                <th>แบรนด์</th>
+                <th>ราคา</th>
+                <th>สต๊อก</th>
+                <th>ประเภทสินค้า</th>
+                <th>รูปภาพ</th>
+                <th>จัดการ</th>
             </tr>
+        </thead>
+        <tbody>
             {% for computer in computers %}
             <tr>
-                <td class="col col-3">{{ computer.name }}</td>
-                <td class="col col-1">{{ computer.brand }}</td>
+                <td>{{ computer.name }}</td>
+                <td>{{ computer.brand }}</td>
                 <td>฿ {{ computer.price }}</td>
-                <td class="col col-1 text-center    ">{{ computer.stock }}</td>
-                <td>{{ computer.category }}</td>
-                <td class="col col-1"> 
-                    <img src="/{{ computer.images }}" 
-                        class="rounded shadow-sm"
-                        style="width: 250px; height: 250px; object-fit: cover;"><br>
+                <td class="{% if computer.stock > 10 %}status-available{% else %}status-low{% endif %} text-center">
+                    {{ computer.stock }}
+                    {% if computer.stock >= 10 %}
+                        ✅
+                    {% else %}
+                        ⚠️
+                    {% endif %}
                 </td>
-                  
-                <td class="action-icons col col-1 text-center">
-                    <a href="{% url 'computerOne' computer.cid %}"><i class="fa-solid fa-pen"></i></a>
-                    <a href="#"><i class="fa-regular fa-trash-can"></i></a>
+                <td>{{ computer.category }}</td>
+                <td class="text-center">
+                    <img src="/{{ computer.images }}" class="img-thumbnail shadow-sm" 
+                        style="width: 120px; height: 120px; object-fit: cover;">
+                </td>
+                <td class="text-center">
+                    <!-- ปุ่มแก้ไข -->
+                    <a href="{% url 'computerOne' computer.cid %}" class="btn btn-warning btn-sm">
+                        ✏️ แก้ไข
+                    </a>
+                    <!-- ปุ่มลบ -->
+                    <a href="{% url 'computerDelete' computer.cid %}" class="btn btn-danger btn-sm delete-btn">
+                        🗑️ ลบ
+                    </a>
                 </td>
             </tr>
-            {% endfor %}      
-        </table>
-    </div>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+<style>
+    .stock-table {
+        background-color: #FFF5E1;
+        border-radius: 15px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    }
+    .stock-table th {
+        background-color: #6D4C41;
+        color: #FFF8E1;
+        text-align: center;
+    }
+    .stock-table td {
+        vertical-align: middle;
+    }
+    .status-available {
+        color: green;
+        font-weight: bold;
+    }
+    .status-low {
+        color: orange;
+        font-weight: bold;
+    }
+</style>
+
+<script>
+    // แจ้งเตือนก่อนลบสินค้า
+    document.querySelectorAll(".delete-btn").forEach(button => {
+        button.addEventListener("click", function(event) {
+            event.preventDefault();
+            let confirmDelete = confirm("คุณต้องการลบสินค้านี้หรือไม่?");
+            if (confirmDelete) {
+                window.location.href = this.href;
+            }
+        });
+    });
+</script>
 
 {% endblock %}

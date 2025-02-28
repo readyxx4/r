@@ -25,7 +25,7 @@
     }
     .card-title {
         font-weight: bold;
-        color: #3e2723;
+        color: #443627;
     }
     footer {
         background: #2c1f14;
@@ -35,23 +35,116 @@
         margin-top: 30px;
         border-radius: 10px;
     }
+    .filter-section {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+        align-items: center;
+        background: #f8f3d9;
+        padding: 15px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    
+    .filter-label {
+        font-weight: bold;
+        color: #443627;
+    }
+    
+    .filter-input, .filter-select {
+        padding: 10px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+        font-size: 16px;
+        outline: none;
+    }
+    
+    .filter-select {
+        background: white;
+    }
+    
+    .btn-filter, .btn-reset {
+        padding: 10px 15px;
+        border: none;
+        border-radius: 5px;
+        font-weight: bold;
+        transition: 0.3s;
+        cursor: pointer;
+    }
+    
+    .btn-filter {
+        background: green;
+        color: white;
+    }
+    
+    .btn-reset {
+        background: #ccc;
+    }
+    
+    .btn-filter:hover {
+        background: darkgreen;
+    }
+    
+    .btn-reset:hover {
+        background: #b3b3b3;
+    }
+    
+    /* Responsive: แสดงเป็น column บนมือถือ */
+    @media (max-width: 768px) {
+        .filter-section {
+            flex-direction: column;
+            gap: 15px;
+        }
+        .filter-input, .filter-select {
+            width: 100%;
+        }
+    }
+    .category-card {
+        border-radius: 15px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        overflow: hidden;
+        position: relative;
+    }
+    
+    .category-card:hover {
+        transform: scale(1.05);
+        box-shadow: 0 6px 15px rgba(0, 0, 0, 0.3);
+    }
+    
+    .category-card img {
+        border-top-left-radius: 15px;
+        border-top-right-radius: 15px;
+        transition: transform 0.3s ease-in-out;
+    }
+    
+    .category-card:hover img {
+        transform: scale(1.1);
+    }
+    
+    
 </style>
 
 <div class="container my-5">
     <div class="banner" style='color:#F8F3D9;'>ระบบจัดการสต๊อกสินค้าอิเล็กทรอนิกส์</div>
-    <div class="filter-section ">
-        <label>ค้นหาสินค้า: </label>
-        <input type="text" placeholder="ค้นหาชื่อสินค้า">
-        <label>หมวดหมู่สินค้า: </label>
-        <select name="category" id="category">
-            <option value= "{{ category.name }}">คอมพิวเตอร์</option>
-            <option value="saab">จอ</option>
-            <option value="opel">ปริ้นเตอร์</option>
-            <option value="audi">อุปกรณ์เสริม</option>
-          </select>
-        <button style="background: green; color: white; padding: 5px 10px; border: none; border-radius: 5px;"> กดกรองผล</button>
-        <button style="background: #ccc; padding: 5px 10px; border: none; border-radius: 5px;"> ตั้งค่าใหม่</button>
+    <div class="filter-section">
+        <label for="search" class="filter-label">🔍 ค้นหาสินค้า:</label>
+        <input type="text" id="search" placeholder="พิมพ์ชื่อสินค้า..." class="filter-input">
+        
+        <label for="category" class="filter-label">📂 หมวดหมู่:</label>
+        <select name="category" id="category" class="filter-select">
+            <option value="all">ทั้งหมด</option>
+            <option value="computer">คอมพิวเตอร์</option>
+            <option value="monitor">จอ</option>
+            <option value="printer">ปริ้นเตอร์</option>
+            <option value="accessories">อุปกรณ์เสริม</option>
+        </select>
+    
+        <button class="btn-filter">🔎 กดกรองผล</button>
+        <button class="btn-reset">♻ ตั้งค่าใหม่</button>
     </div>
+
     <br>
     <div class="row d-flex justify-content-center align-items-center">
         <div class="col-md-2">

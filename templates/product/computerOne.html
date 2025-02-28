@@ -1,66 +1,74 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-<h1 class="text text-center fw-bold display-6" style="color:#443627; text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);">
-    รายละเอียดสินค้า ({{computer.category}})
-</h1>
 
+<div class="container">
+    <h1 class="text-center fw-bold display-5 my-4" 
+        style="color:#443627; text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);">
+        รายละเอียดสินค้า ({{ computer.category }})
+    </h1>
 
-<table class="container my-5 fw-bold table table-bordered table-hover table-striped"
-    style="background-color: rgb(255, 240, 220); border-radius: 15px; 
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);">
-    
-    <tr > 
-        <td class="fw-bold col col-1"  style="background-color: #443627; color: #F8F3D9;" >รหัสสินค้า</td> <td>{{ computer.cid }} </td> 
-    </tr>
-    <tr> <td class="fw-bold" style="background-color: #443627; color: #F8F3D9;">ชื่อสินค้า</td> <td class="display-6">{{ computer.name }} </td> </tr>
-    <tr> <td class="fw-bold" style="background-color: #443627; color: #F8F3D9;">แบรนด์</td> <td class="display-6">{{ computer.brand }}</td> </tr>
-    <tr> <td class="fw-bold" style="background-color: #443627; color: #F8F3D9;">ราคา</td> <td class="display-6">{{ computer.price }} บาท</td> </tr>
-    <tr> <td class="fw-bold" style="background-color: #443627; color: #F8F3D9;">สต๊อก</td> <td>{{ computer.stock }} ชิ้น</td> </tr>
-    <tr> <td class="fw-bold" style="background-color: #443627; color: #F8F3D9;">cpu</td> <td>{{ computer.cpu }} </td> </tr>
-    <tr> <td class="fw-bold" style="background-color: #443627; color: #F8F3D9;">หมวดหมู่</td> <td>{{ computer.category }} </td> </tr>
-        <td class="fw-bold" style="background-color: #443627; color: #F8F3D9;">รูปภาพ </td> 
-        <td > 
-            <img src="/{{ computer.images }}" 
-                class="rounded shadow-sm"
-                style="width: 450px; height: 450px; object-fit: cover;" >
-                <br>
-                <h2 class="fw-bold">คุณสมบัติ</h2>
-                    <table table class="container my-6 fw-bold table table-bordered table-hover"
-                    style="background-color: rgb(255, 240, 220); border-radius: 15px; ">
-                        <tr>
-                            <th>CPU</th>
-                            <td>{{ computer.cpu }}</td>
-                        </tr>
-                        <tr>
-                            <th>CPUCooler</th>
-                            <td>{{ computer.cpuCooler }}</td>
-                        </tr>
-                        <tr>
-                            <th>Mainboard</th>
-                            <td>{{ computer.mainboard }}</td>
-                        </tr>
-                        <tr>
-                            <th>RAM</th>
-                            <td>{{ computer.ram }}</td>
-                        </tr>
-                        <tr>
-                            <th>Storage</th>
-                            <td>{{ computer.storage }}</td>
-                        </tr>
-                        <tr>
-                            <th>Case</th>
-                            <td>{{ computer.case }}</td>
-                        </tr>
-                    </table> 
-        </td> 
-    </tr>
-</table>
+    <div class="row">
+        <!-- รูปภาพสินค้า -->
+        <div class="col-md-6 text-center">
+            <img src="/{{ computer.images }}" class="rounded shadow-lg"
+                style="width: 100%; max-width: 500px; height: auto; object-fit: contain;">
+        </div>
 
-<p class="text-center">
-    <a href="{% url 'computerList' %}" class="btn btn-danger shadow">
-        <i class="fa-solid fa-reply "></i></i> Back     
-    </a>     
-</p>
+        <!-- รายละเอียดสินค้า -->
+        <div class="col-md-6">
+            <table class="table table-bordered shadow-sm"
+                style="background-color: rgb(255, 240, 220); border-radius: 15px;">
+                <tr> 
+                    <td class="fw-bold bg-dark text-light">รหัสสินค้า</td>
+                    <td>{{ computer.cid }}</td>
+                </tr>
+                <tr> 
+                    <td class="fw-bold bg-dark text-light">ชื่อสินค้า</td>
+                    <td class="fs-4">{{ computer.name }}</td>
+                </tr>
+                <tr> 
+                    <td class="fw-bold bg-dark text-light">แบรนด์</td>
+                    <td class="fs-5">{{ computer.brand }}</td>
+                </tr>
+                <tr> 
+                    <td class="fw-bold bg-dark text-light">ราคา</td>
+                    <td class="fs-5 text-danger">฿{{ computer.price }}</td>
+                </tr>
+                <tr> 
+                    <td class="fw-bold bg-dark text-light">สต๊อก</td>
+                    <td>{{ computer.stock }} ชิ้น</td>
+                </tr>
+                <tr> 
+                    <td class="fw-bold bg-dark text-light">หมวดหมู่</td>
+                    <td>{{ computer.category }}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <!-- ตารางคุณสมบัติสินค้า -->
+    <h2 class="fw-bold text-center my-4 " style="color:#443627; text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);">คุณสมบัติสินค้า</h2>
+    <table class="table table-bordered table-hover shadow-lg"
+        style="background-color: rgb(255, 240, 220); border-radius: 15px;">
+        <tr class="bg-secondary text-white">
+            <th>คุณสมบัติ</th>
+            <th>รายละเอียด</th>
+        </tr>
+        <tr><td class="fw-bold">CPU</td> <td>{{ computer.cpu }}</td></tr>
+        <tr><td class="fw-bold">CPU Cooler</td> <td>{{ computer.cpuCooler }}</td></tr>
+        <tr><td class="fw-bold">Mainboard</td> <td>{{ computer.mainboard }}</td></tr>
+        <tr><td class="fw-bold">RAM</td> <td>{{ computer.ram }}</td></tr>
+        <tr><td class="fw-bold">Storage</td> <td>{{ computer.storage }}</td></tr>
+        <tr><td class="fw-bold">Case</td> <td>{{ computer.case }}</td></tr>
+    </table>
+
+    <!-- ปุ่มย้อนกลับ -->
+    <p class="text-center my-4">
+        <a href="{% url 'computerList' %}" class="btn btn-danger btn-lg shadow-lg">
+            <i class="fa-solid fa-arrow-left"></i> กลับไปหน้าหลัก
+        </a>
+    </p>
+</div>
 
 {% endblock %}
